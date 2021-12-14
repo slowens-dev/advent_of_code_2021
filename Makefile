@@ -1,33 +1,15 @@
 all: clean each_day
 
 
-clean: clean_objects clean_runners
-clean_runners:
+clean: 
 	rm *runner -f
-clean_objects:
-	rm src/libs/*.o -f
-
-
 each_day: day1 day2 day3
 all_days:
-	mkdir -p src/libs
-	clang -Wall src/runners/all_days.c -c -o src/libs/all_days.o
-	clang -Wall src/aoc1.c -c -o src/libs/aoc1.o
-	clang -Wall src/aoc2.c -c -o src/libs/aoc2.o
-	clang -Wall  src/aoc3.c -c -o src/libs/aoc3.o -lm
-	clang -Wall src/libs/aoc*.o src/libs/all_days.o -o all_days_runner -lm
+	clang -Wall src/aoc1.c  src/aoc2.c  src/aoc3.c \
+		src/runners/all_days.c -o all_day_runner;
 day1:
-	mkdir -p src/libs
-	clang -Wall src/runners/day1.c -c -o src/libs/day1.o
-	clang -Wall src/aoc1.c -c -o src/libs/aoc1.o
-	clang -Wall src/libs/day1.o src/libs/aoc1.o -o day1_runner
+	clang -Wall src/runners/day1.c src/aoc1.c -lm -o day1_runner;
 day2:
-	mkdir -p src/libs
-	clang -Wall src/runners/day2.c -c -o src/libs/day2.o
-	clang -Wall src/aoc2.c -c -o src/libs/aoc2.o
-	clang -Wall src/libs/day2.o src/libs/aoc2.o -o day2_runner 
+	clang -Wall src/runners/day2.c src/aoc2.c -lm -o day2_runner;
 day3:
-	mkdir -p src/libs
-	clang -Wall src/runners/day3.c -c -o src/libs/day3.o
-	clang -Wall  src/aoc3.c -c -o src/libs/aoc3.o 
-	clang -Wall src/libs/day3.o src/libs/aoc3.o -o day3_runner -lm
+	clang -Wall src/runners/day3.c src/aoc3.c -lm -o day3_runner;
