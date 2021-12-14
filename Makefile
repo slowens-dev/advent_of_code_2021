@@ -29,5 +29,5 @@ day2:
 day3:
 	mkdir -p src/libs
 	clang -Wall src/runners/day3.c -c -o src/libs/day3.o
-	clang -Wall  src/aoc3.c -c -o src/libs/aoc3.o -lm
+	clang -Wall  src/aoc3.c -c -o src/libs/aoc3.o 
 	clang -Wall src/libs/day3.o src/libs/aoc3.o -o day3_runner -lm
