@@ -1,11 +1,10 @@
-
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
-#include<math.h>
-#include<stdint.h>
 
 #include "headers/aoc3.h"
+#include "headers/file_utils.h"
+
 typedef unsigned int uint;
 
 uint convert_binary_to_decimal(const char* binary, uint n_bits){
@@ -14,39 +13,24 @@ uint convert_binary_to_decimal(const char* binary, uint n_bits){
 		if(binary[b] == '1') ret += 1 << (n_bits - b - 1);
 	return ret;
 }
-uint get_n_lines3(const char* filepath){
-	FILE* fp = fopen(filepath, "r");
-	uint n_lines = 1;
-	for( char c = fgetc(fp); c != EOF; c = fgetc(fp) )
-		if(c == '\n') n_lines++;
-	fclose(fp);
-	return n_lines;
-}
-uint get_n_bits(const char* filepath){
-	FILE* fp = fopen(filepath, "r");
-	uint n_bits = 0;
-	while( fgetc(fp) != '\n' ) n_bits++;
-	fclose(fp);
-	return n_bits;
-}
-void load_array_from_file(const char* filepath, char** arr){
+void load_array_from_file(const char* filepath, char** arr, uint n_bits){
 	FILE *fp = fopen( filepath, "r");
 	char* linebuf = NULL;
 	size_t linebuf_sz;
-	for(int line_len = getline( &linebuf, &linebuf_sz, fp); line_len > 0;  line_len = getline( &linebuf, &linebuf_sz, fp)){
-		printf("%s", linebuf);
+	for(int i=0, line_len = getline( &linebuf, &linebuf_sz, fp); line_len > 0; ++i, line_len = getline( &linebuf, &linebuf_sz, fp)){
+		strncpy(arr[i], linebuf, n_bits);
 	}
 	fclose(fp);
 	free(linebuf);
 }
 int aoc3(const char* filepath){
-	uint n_lines = get_n_lines3(filepath);
-	uint n_bits = get_n_bits(filepath);
+	uint n_lines = get_n_lines(filepath);
+	uint n_bits = get_uniform_line_len(filepath) - 1;
 	char** line_arr = (char**) calloc(n_lines, sizeof(char*));
 	for(uint l=0; l<n_lines; ++l){
 		line_arr[l] = (char*) calloc(n_bits+1, sizeof(char));
 	}
-	load_array_from_file(filepath, line_arr);
+	load_array_from_file(filepath, line_arr, n_bits);
 
 	uint G = 0, E = 0;
 	for(uint b=0; b<n_bits; ++b){
@@ -69,14 +53,13 @@ int aoc3(const char* filepath){
 	return G*E;
 }
 int aoc3_2(const char* filepath){
-	uint n_lines = get_n_lines3(filepath);
-	uint n_bits = get_n_bits(filepath);
+	uint n_lines = get_n_lines(filepath);
+	uint n_bits = get_uniform_line_len(filepath) - 1;
 	char** line_arr = (char**) calloc(n_lines, sizeof(char*));
 	for(uint l=0; l<n_lines; ++l){
 		line_arr[l] = (char*) calloc(n_bits+1, sizeof(char));
 	}
-	load_array_from_file(filepath, line_arr);
-	load_array_from_file(filepath, line_arr);
+	load_array_from_file(filepath, line_arr, n_bits);
 	char * o2_bits = (char*) malloc((n_bits+1) * sizeof(char));
 	char * co2_bits = (char*) malloc((n_bits+1) * sizeof(char));
 	int cnt = 0;

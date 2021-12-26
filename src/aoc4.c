@@ -1,13 +1,10 @@
-
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
-#include<math.h>
-#include<stdint.h>
 #include<stdbool.h>
 
 #include "headers/aoc4.h"
-typedef unsigned int uint;
+#include "headers/defined_types.h"
 
 void get_file_stats(const char* filepath, uint* n_lines, uint* n_rounds, uint* n_boards){
 	FILE* fp = fopen(filepath, "r");
@@ -33,8 +30,8 @@ void load_arrays(const char* filepath, int* rounds, int** boards, uint n_boards)
 	rewind(fp);
 	for( char c = fgetc(fp); c != '\n'; c = fgetc(fp) );
 	fgetc(fp);
-	for(int i=0; i<n_boards; ++i){
-		for(int j=0, k=0; j<5; ++j, k=0){
+	for(uint i=0; i<n_boards; ++i){
+		for(uint j=0, k=0; j<5; ++j, k=0){
 			getline( &linebuf, &linebuf_sz, fp);
 			for(char* tok = strtok(linebuf, " "); tok != NULL; tok = strtok(NULL, " "))
 				boards[i][(j*5)+(k++)] = atoi(tok);
@@ -45,8 +42,8 @@ void load_arrays(const char* filepath, int* rounds, int** boards, uint n_boards)
 	free(linebuf);
 }
 void print_board(int* board){
-	for(int i=0; i<5; ++i){
-		for(int j=0; j<5; ++j){
+	for(uint i=0; i<5; ++i){
+		for(uint j=0; j<5; ++j){
 			printf("%3d ", board[(i*5)+j]);
 		}
 		printf("\n");
@@ -54,12 +51,12 @@ void print_board(int* board){
 	printf("\n");
 }
 void print_boards(int** boards, uint n_boards){
-	for(int b=0; b<n_boards; b++){
+	for(uint b=0; b<n_boards; b++){
 		print_board(boards[b]);
 	}
 }
 void execute_round(int** boards, uint n_boards, int round){
-	for(int b=0; b<n_boards; b++){
+	for(uint b=0; b<n_boards; b++){
 		for(int i=0; i<5; ++i){
 			for(int j=0; j<5; ++j){
 				if( boards[b][(i*5)+j] == round){
@@ -80,7 +77,7 @@ bool check_board(int* board){
 	return false;
 }
 uint find_first_winner(int** boards, uint n_boards){
-	for(int b=0; b<n_boards; b++){
+	for(uint b=0; b<n_boards; b++){
 		if (check_board(boards[b])) return b;
 	}
 	return n_boards;
@@ -121,7 +118,7 @@ int aoc4_2(const char* filepath){
 	int* rounds = (int*) calloc(n_rounds, sizeof(int));
 	int** boards = (int**) calloc(n_boards, sizeof(int*));
 	bool* winners = (bool*) calloc(n_boards, sizeof(bool));
-	for (int i=0; i<n_boards; ++i){
+	for (uint i=0; i<n_boards; ++i){
 		boards[i] = (int*) calloc(25, sizeof(int));
 	}
 	load_arrays(filepath, rounds, boards, n_boards);
@@ -143,7 +140,7 @@ int aoc4_2(const char* filepath){
 	int retval = sum_board(boards[last_winner]);
 	retval *= rounds[i_round-1];
 
-	for (int i=0; i<n_boards; ++i)
+	for (uint i=0; i<n_boards; ++i)
 		free(boards[i]);
 	free(boards);
 	free(rounds);

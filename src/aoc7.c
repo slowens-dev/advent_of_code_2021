@@ -3,8 +3,8 @@
 #include<string.h>
 #include<limits.h>
 
+#include "headers/defined_types.h"
 #include "headers/aoc7.h"
-typedef unsigned int uint;
 uint get_n_crabs(const char* filepath){
 	FILE *fp = fopen( filepath, "r");
 	int n_crabs = 1;
