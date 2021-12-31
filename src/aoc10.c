@@ -3,9 +3,7 @@
 #include<limits.h>
 
 #include "headers/aoc10.h"
-#include "headers/character_stack.h"
-#include "headers/sorting_algorithms.h"
-#include "headers/defined_types.h"
+#include "headers/utils.h"
 
 lluint aoc10(const char* filepath){
 	C_STACK* closer_stack = (C_STACK*) malloc(sizeof(C_STACK));
@@ -75,15 +73,15 @@ lluint aoc10(const char* filepath){
 	fclose(fp);
 	return sum;
 }
-llui aoc10_2(const char* filepath){
+lluint aoc10_2(const char* filepath){
 	C_STACK* closer_stack = (C_STACK*) malloc(sizeof(C_STACK));
 	*closer_stack = (C_STACK){.value = '\0', .below = NULL};
 	FILE* fp = fopen(filepath, "r");
-	llui ret, n_lines = 0, i_line = 0;
+	lluint ret, n_lines = 0, i_line = 0;
 	for(char c=fgetc(fp); c!=EOF; c=fgetc(fp))
 		if( c == '\n' ) n_lines++;
 	rewind(fp);
-	llui* scores = ( llui*) calloc(n_lines, sizeof( llui));
+	lluint* scores = ( lluint*) calloc(n_lines, sizeof( lluint));
 	for(char c=fgetc(fp); c!=EOF; c=fgetc(fp)){
 		switch(c){
 			case '(': 

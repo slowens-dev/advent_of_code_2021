@@ -3,7 +3,7 @@
 #include<string.h>
 #include<limits.h>
 
-#include "headers/defined_types.h"
+#include "headers/utils.h"
 #include "headers/aoc7.h"
 uint get_n_crabs(const char* filepath){
 	FILE *fp = fopen( filepath, "r");

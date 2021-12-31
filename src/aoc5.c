@@ -35,11 +35,11 @@ void load_xy_arrays(int *x1, int *x2, int *y1, int *y2, const char* filepath){
 	free(linebuf);
 }
 void load_dimension_variables(int* x1, int* x2, int *y1, int *y2, uint* x_dim, uint* y_dim, uint n_lines){
-	int x = ( x1[0] > x2[0] ) ? x1[0] : x2[0];
+	uint x = ( x1[0] > x2[0] ) ? x1[0] : x2[0];
 	*x_dim = x;
-	int y = ( y1[0] > y2[0] ) ? y1[0] : y2[0];
+	uint y = ( y1[0] > y2[0] ) ? y1[0] : y2[0];
 	*y_dim = y;
-	for( int i=1; i<n_lines; ++i){
+	for( uint i=1; i<n_lines; ++i){
 		x = ( x1[i] > x2[i] ) ? x1[i] : x2[i];
 		*x_dim = ( *x_dim > x ) ? *x_dim : x;
 		y = ( y1[i] > y2[i] ) ? y1[i] : y2[i];
@@ -48,9 +48,9 @@ void load_dimension_variables(int* x1, int* x2, int *y1, int *y2, uint* x_dim, u
 	*x_dim += 1;
 	*y_dim += 1;
 }
-void calculate_field_straight_lines(int** field, int* x1, int* x2, int* y1, int* y2, uint n_lines, uint x_dim, uint y_dim){
+void calculate_field_straight_lines(int** field, int* x1, int* x2, int* y1, int* y2, uint n_lines){
 	
-	for( int straight= 0,low = 0, high = 0, i=0; i<n_lines; ++i){
+	for( uint straight= 0,low = 0, high = 0, i=0; i<n_lines; ++i){
 		if ( x1[i] == x2[i] && y1[i] != y2[i] ){
 			straight = x1[i];
 			if(y1[i] > y2[i]){
@@ -60,7 +60,7 @@ void calculate_field_straight_lines(int** field, int* x1, int* x2, int* y1, int*
 				low = y1[i];
 				high = y2[i];
 			}
-			for(int iy=low; iy<=high; ++iy){
+			for(uint iy=low; iy<=high; ++iy){
 				field[iy][straight] += 1;
 			}
 		} 
@@ -73,7 +73,7 @@ void calculate_field_straight_lines(int** field, int* x1, int* x2, int* y1, int*
 				low = x1[i];
 				high = x2[i];
 			}
-			for(int ix=low; ix<=high; ++ix){
+			for(uint ix=low; ix<=high; ++ix){
 				field[straight][ix] += 1;
 			}
 			
@@ -81,11 +81,10 @@ void calculate_field_straight_lines(int** field, int* x1, int* x2, int* y1, int*
 	}
 
 }
-void calculate_field(int** field, int* x1, int* x2, int* y1, int* y2, uint n_lines, uint x_dim, uint y_dim){
+void calculate_field(int** field, int* x1, int* x2, int* y1, int* y2, uint n_lines){
 	int straight= 0,low = 0, high = 0;
-	for( int i=0; i<n_lines; ++i){
+	for( uint i=0; i<n_lines; ++i){
 		if ( x1[i] == x2[i] && y1[i] != y2[i] ){
-			//same x : different y ::: vertical 
 			straight = x1[i];
 			if(y1[i] > y2[i]){
 				high = y1[i];
@@ -98,7 +97,6 @@ void calculate_field(int** field, int* x1, int* x2, int* y1, int* y2, uint n_lin
 				field[iy][straight] += 1;
 			}
 		} else if ( y1[i] == y2[i] && x1[i] != x2[i]){
-			//same y : different x ::: horizontal
 			straight = y1[i];
 			if(x1[i] > x2[i]){
 				high = x1[i];
@@ -137,16 +135,16 @@ int aoc5(const char* filepath){
 	load_xy_arrays(x1, x2, y1, y2, filepath);
 	load_dimension_variables(x1, x2, y1, y2, &x_dim, &y_dim, n_lines);
 	int** field = (int**) calloc(y_dim,sizeof(int*));
-	for(int y=0; y<y_dim; ++y){
+	for(uint y=0; y<y_dim; ++y){
 		field[y] = (int*) calloc(x_dim, sizeof(int));
-		for(int x=0; x<x_dim; ++x) field[y][x] = 0;
+		for(uint x=0; x<x_dim; ++x) field[y][x] = 0;
 	}
 
-	calculate_field_straight_lines(field, x1, x2, y1, y2, x_dim, y_dim, n_lines);
+	calculate_field_straight_lines(field, x1, x2, y1, y2, x_dim);
 
 	int retval = 0;
-	for(int y=0; y<y_dim; ++y){
-		for(int x=0; x<x_dim; ++x){
+	for(uint y=0; y<y_dim; ++y){
+		for(uint x=0; x<x_dim; ++x){
 			if (field[y][x] >= 2)
 				retval += 1;
 		}
@@ -168,16 +166,16 @@ int aoc5_2(const char* filepath ){
 	load_xy_arrays(x1, x2, y1, y2, filepath);
 	load_dimension_variables(x1, x2, y1, y2, &x_dim, &y_dim, n_lines);
 	int** field = (int**) calloc(y_dim,sizeof(int*));
-	for(int y=0; y<y_dim; ++y){
+	for(uint y=0; y<y_dim; ++y){
 		field[y] = (int*) calloc(x_dim, sizeof(int));
-		for(int x=0; x<x_dim; ++x) field[y][x] = 0;
+		for(uint x=0; x<x_dim; ++x) field[y][x] = 0;
 	}
 
-	calculate_field(field, x1, x2, y1, y2, x_dim, y_dim, n_lines);
+	calculate_field(field, x1, x2, y1, y2, x_dim);
 
 	int retval = 0;
-	for(int y=0; y<y_dim; ++y){
-		for(int x=0; x<x_dim; ++x)
+	for(uint y=0; y<y_dim; ++y){
+		for(uint x=0; x<x_dim; ++x)
 				if (field[y][x] >= 2) retval += 1;
 		free(field[y]);
 	}

@@ -7,30 +7,17 @@
 void load_uniform_single_digit_file_to_array_2d_by_structure(const char* filepath, uint** arr){
 	FILE* fp = fopen(filepath, "r");
 	int row=0, col=0;
-	for(char c=fgetc(fp); c!=EOF; c=fgetc(fp)){
-		if ( c == '\n' ){
-			col=0;
+	for(char c = fgetc(fp); c != EOF; c = fgetc(fp)){
+		if( c == '\n' ){
 			row++;
-			printf("\n");
+			col = 0;
 		}
-		else{
-			arr[row][col] = c - '0';
-			printf("%u", arr[row][col]);
-			printf("(%d,%d) ", row, col);
-		}
+		else
+			arr[row][col++] = c - '0';
 	}
 	fclose(fp);
-	printf("\n========\n");
-	for(uint r=0; r<10; ++r){
-		for(uint c=0; c<10; ++c){
-			//printf("%d", arr[r*n_cols + c]);
-			printf("%u", arr[r][c]);
-			printf("(%d,%d) ", c, r);
-		}
-		printf("\n");
-	}
 }
-void load_uniform_single_digit_file_to_array_2d_by_index(const char* filepath, uint* arr, uint n_cols){
+void load_uniform_single_digit_file_to_array_2d_by_index(const char* filepath, uint* arr){
 	FILE* fp = fopen(filepath, "r");
 	uint i = 0;
 	for(char c=fgetc(fp); c != EOF; c=fgetc(fp)){

@@ -4,7 +4,7 @@
 #include<stdbool.h>
 
 #include "headers/aoc4.h"
-#include "headers/defined_types.h"
+#include "headers/utils.h"
 
 void get_file_stats(const char* filepath, uint* n_lines, uint* n_rounds, uint* n_boards){
 	FILE* fp = fopen(filepath, "r");
@@ -95,7 +95,7 @@ int aoc4(const char* filepath){
 
 	int* rounds = (int*) calloc(n_rounds, sizeof(int));
 	int** boards = (int**) calloc(n_boards, sizeof(int*));
-	for (int i=0; i<n_boards; ++i){
+	for (uint i=0; i<n_boards; ++i){
 		boards[i] = (int*) calloc(25, sizeof(int));
 	}
 	load_arrays(filepath, rounds, boards, n_boards);
@@ -106,7 +106,7 @@ int aoc4(const char* filepath){
 	int retval = sum_board(boards[winner]);
 	retval *= rounds[i_round-1];
 
-	for (int i=0; i<n_boards; ++i)
+	for (uint i=0; i<n_boards; ++i)
 		free(boards[i]);
 	free(boards);
 	free(rounds);

@@ -10,6 +10,8 @@
 #include "../headers/aoc8.h"
 #include "../headers/aoc9.h"
 #include "../headers/aoc10.h"
+#include "../headers/aoc11.h"
+
 int main(){
 	printf("1.1\t:\t%d\n", aoc1("input/1.txt"));
 	printf("1.2\t:\t%d\n", aoc1_2("input/1.txt"));
@@ -31,4 +33,6 @@ int main(){
 	printf("9.2\t:\t%d\n", aoc9_2("input/9.txt"));
 	printf("10.1\t:\t%llu\n", aoc10("input/10.txt"));
 	printf("10.2\t:\t%llu\n", aoc10_2("input/10.txt"));
+	printf("11.1\t:\t%u\n", aoc11("input/11.txt"));
+	printf("11.2\t:\t%u\n", aoc11_2("input/11.txt"));
 }

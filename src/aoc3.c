@@ -3,7 +3,7 @@
 #include<string.h>
 
 #include "headers/aoc3.h"
-#include "headers/file_utils.h"
+#include "headers/utils.h"
 
 typedef unsigned int uint;
 
