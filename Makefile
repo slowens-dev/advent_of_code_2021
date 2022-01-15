@@ -1,10 +1,18 @@
+all: clean_all utils all_days each_day
+each_day: day1 day2 day3 day4 day5 day6 day7 day8 day9 day10 
+clean_all: clean_utils clean_runners
+clean: clean_runners
+all_days:
+	clang -Wall src/aoc1.c src/aoc2.c src/aoc3.c src/aoc4.c src/aoc5.c \
+				src/aoc6.c src/aoc7.c src/aoc8.c src/aoc9.c src/aoc10.c \
+				src/aoc11.c \
+				src/runners/all_days.c libs/utils.a \
+				-o all_day_runner;
 #############################
 clean_runners: 
 	rm *runner -f
 clean_utils:
 	rm libs/* -f
-clean_all: clean_utils clean_runners
-clean: clean_runners
 #############################
 utils:
 	mkdir -p libs;
@@ -73,12 +81,13 @@ day12:
 		src/runners/day12.c src/aoc12.c \
 		libs/utils.a \
 		-o day12_runner;
-all_days:
-	clang -Wall src/aoc1.c src/aoc2.c src/aoc3.c src/aoc4.c src/aoc5.c \
-				src/aoc6.c src/aoc7.c src/aoc8.c src/aoc9.c src/aoc10.c \
-				src/aoc11.c \
-				src/runners/all_days.c libs/utils.a \
-				-o all_day_runner;
-each_day: day1 day2 day3 day4 day5 day6 day7 day8 day9 day10 
-#############################
-all: clean_all utils all_days each_day
+day13:
+	clang -Wall \
+		src/runners/day13.c src/aoc13.c \
+		libs/utils.a \
+		-o day13_runner; 
+day14:
+	clang -Wall \
+		src/runners/day14.c src/aoc14.c \
+		libs/utils.a \
+		-o day14_runner; 
