@@ -3,6 +3,7 @@
 #include<string.h>
 
 #include "headers/aoc5.h"
+#include "headers/utils.h"
 
 uint get_n_lines5(const char* filepath){
 	FILE* fp = fopen(filepath, "r");
@@ -126,7 +127,7 @@ void calculate_field(int** field, int* x1, int* x2, int* y1, int* y2, uint n_lin
 
 	}
 }
-int aoc5(const char* filepath){
+lluint aoc5(const char* filepath){
 	uint x_dim, y_dim, n_lines = get_n_lines5(filepath);
 	int* x1 = (int*) calloc(2*n_lines, sizeof(int));
 	int* x2 = (int*) calloc(2*n_lines, sizeof(int));
@@ -157,7 +158,7 @@ int aoc5(const char* filepath){
 	free(y2);
 	return retval;
 }
-int aoc5_2(const char* filepath ){
+lluint aoc5_2(const char* filepath ){
 	uint x_dim, y_dim, n_lines = get_n_lines5(filepath);
 	int* x1 = (int*) calloc(2*n_lines, sizeof(int));
 	int* x2 = (int*) calloc(2*n_lines, sizeof(int));

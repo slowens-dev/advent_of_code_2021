@@ -3,8 +3,9 @@
 #include<string.h>
 
 #include "headers/aoc2.h"
+#include "headers/utils.h"
 //o(n)
-int aoc2(const char* filepath){
+lluint aoc2(const char* filepath){
 	FILE *fp = fopen( filepath, "r");
 	char* linebuf = NULL;
 	size_t linebuf_sz;
@@ -27,7 +28,7 @@ int aoc2(const char* filepath){
 	free(linebuf);
 	return (depth * distance);
 }
-int aoc2_2(const char* filepath){
+lluint aoc2_2(const char* filepath){
 	FILE *fp = fopen( filepath, "r");
 	char* linebuf = NULL;
 	size_t linebuf_sz;

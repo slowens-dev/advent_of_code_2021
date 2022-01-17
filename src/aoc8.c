@@ -4,6 +4,7 @@
 #include<stdbool.h>
 
 #include "headers/aoc8.h"
+#include "headers/utils.h"
 
 
                                                                                               
@@ -16,7 +17,7 @@ bool readStrFromLine(char* buffer, int length, FILE* f)
 }
 
 
-int aoc8(const char* filepath){
+lluint aoc8(const char* filepath){
 	FILE* fp = fopen(filepath, "r");
 	int word_len, n_lines = 0, count = 0;
 	for(char c=fgetc(fp); c!=EOF; c=fgetc(fp))
@@ -68,7 +69,7 @@ int aoc8(const char* filepath){
 }
 
 
-int aoc8_2(const char* filepath ){
+lluint aoc8_2(const char* filepath ){
 	FILE *fp = fopen( filepath, "r");
 	char* linebuf = NULL;
 	size_t linebuf_sz, tok_len;

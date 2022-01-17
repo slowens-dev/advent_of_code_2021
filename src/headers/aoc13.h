@@ -4,7 +4,7 @@
 #ifndef __AOC13_H_
 #define __AOC13_H_
 
-int aoc13( const char* filepath );
-int aoc13_2( const char* filepath );
+unsigned long long int aoc13( const char* filepath );
+unsigned long long int aoc13_2( const char* filepath );
 
 #endif

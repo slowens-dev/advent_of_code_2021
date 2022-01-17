@@ -48,7 +48,7 @@ uint cycle(uint** arr, bool** flashed, uint xy){
 				flash(arr, flashed, r, c, xy);
 	return reset_flashers(arr, flashed, xy);
 }
-uint aoc11(const char* filepath){
+lluint aoc11(const char* filepath){
 	uint ret = 0;
 	uint xy = get_uniform_line_len(filepath);
 	uint** arr = calloc(xy, sizeof(uint*));
@@ -72,7 +72,7 @@ uint aoc11(const char* filepath){
 	free(flashed);
 	return ret;
 }
-uint aoc11_2(const char* filepath){
+lluint aoc11_2(const char* filepath){
 	uint ret = 1;
 	uint xy = get_uniform_line_len(filepath);
 	uint** arr = calloc(xy, sizeof(uint*));

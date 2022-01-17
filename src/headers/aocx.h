@@ -4,7 +4,7 @@
 #ifndef __AOCx_H_
 #define __AOCx_H_
 
-int aocx( const char* filepath );
-int aocx_2( const char* filepath );
+unsigned long long int aocx( const char* filepath );
+unsigned long long int aocx_2( const char* filepath );
 
 #endif

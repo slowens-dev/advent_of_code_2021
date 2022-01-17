@@ -89,7 +89,7 @@ int sum_board(int* board){
 			sum += board[i];
 	return sum;			
 }
-int aoc4(const char* filepath){
+lluint aoc4(const char* filepath){
 	uint n_lines, n_rounds, n_boards;
 	get_file_stats(filepath, &n_lines, &n_rounds, &n_boards);
 
@@ -112,7 +112,7 @@ int aoc4(const char* filepath){
 	free(rounds);
 	return retval;
 }
-int aoc4_2(const char* filepath){
+lluint aoc4_2(const char* filepath){
 	uint n_lines, n_rounds, n_boards;
 	get_file_stats(filepath, &n_lines, &n_rounds, &n_boards);
 	int* rounds = (int*) calloc(n_rounds, sizeof(int));

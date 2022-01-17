@@ -3,7 +3,7 @@
 
 #include "headers/aoc1.h"
 
-int aoc1(const char* filepath){
+unsigned long long int aoc1(const char* filepath){
 	FILE *fp = fopen( filepath, "r");
 	char* linebuf = NULL;
 	size_t linebuf_sz;
@@ -21,7 +21,7 @@ int aoc1(const char* filepath){
 	free(linebuf);
 	return increase_cnt;
 }
-int aoc1_2(const char* filepath ){
+unsigned long long int aoc1_2(const char* filepath ){
 	FILE *fp = fopen( filepath , "r");
 	char* linebuf = NULL;
 	size_t linebuf_sz;

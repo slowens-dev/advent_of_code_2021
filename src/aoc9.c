@@ -44,7 +44,7 @@ int get_basin_size(int** heightmap, bool** graph, int row, int col, int n_rows, 
 	}
 	return ret;
 }
-int aoc9(const char* filepath){
+lluint aoc9(const char* filepath){
 	int sum = 0;
 	uint n_rows = get_n_lines(filepath);
 	uint n_cols = get_uniform_line_len(filepath);
@@ -64,7 +64,7 @@ int aoc9(const char* filepath){
 	free(heightmap);
 	return sum;
 }
-int aoc9_2(const char* filepath){
+lluint aoc9_2(const char* filepath){
 	uint n_rows = get_n_lines(filepath);
 	uint n_cols = get_uniform_line_len(filepath);
 	int** heightmap = (int**) calloc(n_rows, sizeof(int*));

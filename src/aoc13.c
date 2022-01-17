@@ -21,6 +21,7 @@ static void get_dimensions (const char* filepath, uint* x_dim, uint* y_dim){
 	}
 	*x_dim += 1;
 	*y_dim += 1;
+	free(linebuf);
 	fclose(fp);
 }
 static void init_points (const char* filepath, bool** arr,  uint* x_dim, uint* y_dim){
@@ -34,10 +35,10 @@ static void init_points (const char* filepath, bool** arr,  uint* x_dim, uint* y
 		y = atoi( strtok(NULL, ",") );
 		arr[y][x] = true;
 	}
+	free(linebuf);
 	fclose(fp);
 }
 static void foldx(bool** arr, uint fold, uint* x_dim, uint* y_dim){
-	printf("X %d\n", fold);
 	for(uint y=0; y<*y_dim; ++y){
 		for(uint x=fold+1, fold_x; x<*x_dim; ++x){
 			fold_x = fold - (x-fold);
@@ -48,7 +49,6 @@ static void foldx(bool** arr, uint fold, uint* x_dim, uint* y_dim){
 	*x_dim = fold;
 }
 static void foldy(bool** arr, uint fold, uint* x_dim, uint* y_dim){
-	printf("Y %d\n", fold);
 	for(uint y=fold+1, fold_y; y<*y_dim; ++y){
 		fold_y = fold - (y - fold);
 		for(uint x=0; x<*x_dim; ++x){
@@ -74,6 +74,7 @@ static void do_n_folds (const char* filepath, uint n, bool** arr,  uint x_dim, u
 				break;
 		}
 	}
+	free(linebuf);
 	fclose(fp);
 }
 static void do_folds (const char* filepath, bool** arr,  uint* x_dim, uint* y_dim){
@@ -92,9 +93,10 @@ static void do_folds (const char* filepath, bool** arr,  uint* x_dim, uint* y_di
 				break;
 		}
 	}
+	free(linebuf);
 	fclose(fp);
 }
-int aoc13(const char* filepath){
+lluint aoc13(const char* filepath){
 	uint x_dim, y_dim, ret = 0;
 	get_dimensions(filepath, &x_dim, &y_dim);
 	bool** arr = calloc(y_dim, sizeof(bool*));
@@ -106,11 +108,14 @@ int aoc13(const char* filepath){
 			if(arr[y][x]) ret++;
 		}
 	}
+	for(uint i=0; i<y_dim; ++i) free(arr[i]);
+	free(arr);
 	return ret;
 }
-int aoc13_2(const char* filepath ){
-	uint x_dim, y_dim;
+lluint aoc13_2(const char* filepath ){
+	uint x_dim, y_dim, orig_y;
 	get_dimensions(filepath, &x_dim, &y_dim);
+	orig_y = y_dim;
 	bool** arr = calloc(y_dim, sizeof(bool*));
 	for(uint i=0; i<y_dim; i++) arr[i] = calloc(x_dim, sizeof(bool));
 	init_points(filepath, arr, &x_dim, &y_dim);
@@ -121,5 +126,7 @@ int aoc13_2(const char* filepath ){
 		}
 		printf("\n");
 	}
+	for(uint i=0; i<orig_y; ++i) free(arr[i]);
+	free(arr);
 	return 0;
 }

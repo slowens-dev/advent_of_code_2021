@@ -27,7 +27,7 @@ void load_crabs_array(uint* crabs, uint n_crabs, const char* filepath){
 	fclose(fp);
 	free(linebuf);
 }
-int aoc7(const char* filepath){
+lluint aoc7(const char* filepath){
 	uint largest = 0;
 	int difference = 0;
 	uint smallest = UINT_MAX;
@@ -49,7 +49,7 @@ int aoc7(const char* filepath){
 	free(crabs);
 	return shortest_total;
 }
-int aoc7_2(const char* filepath ){
+lluint aoc7_2(const char* filepath ){
 	uint largest = 0;
 	int difference = 0;
 	uint smallest = UINT_MAX;

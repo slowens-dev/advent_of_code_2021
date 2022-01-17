@@ -30,25 +30,9 @@ static uint load_startpoints(const char* filepath, char** routes){
 	fclose(fp);
 	return i_route;
 }
-int aoc12(const char* filepath){
-	uint n_lines = get_n_lines( filepath );
-	char** routes = calloc(n_lines, sizeof(char*));
-	for(uint i=0; i<n_lines; ++i) routes[i] = calloc(100, sizeof(char));
-
-
-
-	uint n_routes = load_startpoints(filepath, routes);
-	
-
-
-	printf("==============\n");
-	for(uint i=0; i<n_routes; ++i){
-		char* last_tok;
-		for(char* tok=strtok(routes[i], "-"); tok != NULL; tok=strtok(routes[i], "-")) last_tok = tok;
-		printf("%s\n\t\t%s\n", routes[i], last_tok);
-	}
+lluint aoc12(const char* filepath){
 	return 0;
 }
-int aoc12_2(const char* filepath ){
+lluint aoc12_2(const char* filepath ){
 	return 0;
 }

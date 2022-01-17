@@ -23,7 +23,7 @@ void load_array_from_file(const char* filepath, char** arr, uint n_bits){
 	fclose(fp);
 	free(linebuf);
 }
-int aoc3(const char* filepath){
+lluint aoc3(const char* filepath){
 	uint n_lines = get_n_lines(filepath);
 	uint n_bits = get_uniform_line_len(filepath) - 1;
 	char** line_arr = (char**) calloc(n_lines, sizeof(char*));
@@ -52,7 +52,7 @@ int aoc3(const char* filepath){
 	free(line_arr);
 	return G*E;
 }
-int aoc3_2(const char* filepath){
+lluint aoc3_2(const char* filepath){
 	uint n_lines = get_n_lines(filepath);
 	uint n_bits = get_uniform_line_len(filepath) - 1;
 	char** line_arr = (char**) calloc(n_lines, sizeof(char*));
